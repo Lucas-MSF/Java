@@ -29,12 +29,7 @@ public class questao2 {
 				}
 			}
 		}
-				
-		
-		//valores para teste: 1 4 5 6 7 8 9 20 18 19 17 16 2 3 10 12 11 13 14 15
-		
-		
-			
+					
 		System.out.println("\nvetor digitado em ordem decrescente:");
 		for(int i=19;i>=0;i--) 
 				System.out.print(vetorOrganizado[i]+" ");
