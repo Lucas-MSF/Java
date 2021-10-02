@@ -3,33 +3,27 @@ package atividade;
 import java.util.Scanner;
 
 public class questao4 {
+
 	public static void main(String[] args) {
-	 
-		Scanner ent= new Scanner(System.in);
 		
-		int numeros[]= new int[10];
-		int maior=0;
+		Scanner sc= new Scanner(System.in);
+		int numeros,maior=0,menor=0;
 		
-		for(int i=0; i<10;i++) {
+		System.out.println("Insira 10 valores aleatorios: ");
+		
+		for(int i=0;i<10;i++){
+			numeros= sc.nextInt();
 			
-			numeros[i]= ent.nextInt();
+			if(menor==0)
+				menor=numeros;
+			
+			if(numeros>maior)
+				maior=numeros;
+			
+			else if(numeros<menor)
+				menor=numeros;
 		}
-		
-		int menor=numeros[0];
-		
-		for(int i=0; i<10;i++) {
-			
-			if(numeros[i]>maior) {
-				maior= numeros[i];
-			}
-			
-			if(menor>numeros[i]) {
-				menor= numeros[i];		
-			}
-		}
-		
-		System.out.println("O menor numero é:" + menor);
-		
-		System.out.println("O maior numero é:" + maior);
+		System.out.println("Maior numero: " + maior);
+		System.out.println("Menor numero: " + menor);
 	}
 }
