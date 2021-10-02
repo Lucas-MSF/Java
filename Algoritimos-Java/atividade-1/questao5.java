@@ -23,9 +23,11 @@ public class questao5 {
 			System.out.print(">> ");
 			opcao= sc.nextInt();
 			
-			
+		if(opcao >=0 && opcao<=9)	
 		System.out.println(times[opcao] + " " + frases[rs.nextInt(7)]);
-		sc.close();
+		else
+			System.out.println("opcao invalida!");
 	
+		sc.close();
 	}
 }
