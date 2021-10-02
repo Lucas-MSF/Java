@@ -2,19 +2,22 @@ package atividade;
 
 import java.util.Scanner;
 
-public class questão1 {
-	public static void main(String[] args) {
+public class questao1 {
+	public static void main(String[]args) {
+		Scanner sc= new Scanner(System.in);
 		
-		Scanner ent = new Scanner(System.in);
+		float notas[]= new float[5];
+		float media=0;
+		System.out.println("Digite o valor das 5 notas: ");
 		
-		float Pontos[] = new float[5];
-		float Soma=0;
-		
-		for(int i= 0 ;i <5 ; i++ ) {
-			Pontos[i]= ent.nextFloat();
-			Soma= Pontos[i]+Soma;
+		for(int i=0;i<5;i++) {
+			notas[i]= sc.nextFloat();
+			media += notas[i];
 		}
-		float resultado= Soma/5;
-		System.out.println("sua media final é:"+ resultado);
+		media/=5;
+		System.out.printf("A media das notas inseridas e de: %.2f", media);
+		
+		sc.close();
+		
 	}
 }

@@ -25,5 +25,7 @@ public class questao4 {
 		}
 		System.out.println("Maior numero: " + maior);
 		System.out.println("Menor numero: " + menor);
+		
+		sc.close();
 	}
 }

@@ -1,4 +1,5 @@
 package atividade;
+
 import java.util.Scanner;
 
 public class questao2 {
@@ -29,11 +30,12 @@ public class questao2 {
 				}
 			}
 		}
-					
+
 		System.out.println("\nvetor digitado em ordem decrescente:");
 		for(int i=19;i>=0;i--) 
 				System.out.print(vetorOrganizado[i]+" ");
-
+		
+		sc.close();
 	}
 
 }
