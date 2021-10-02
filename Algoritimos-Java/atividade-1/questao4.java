@@ -1,5 +1,6 @@
 package atividade;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class questao4 {
@@ -7,22 +8,27 @@ public class questao4 {
 	public static void main(String[] args) {
 		
 		Scanner sc= new Scanner(System.in);
-		int numeros,maior=0,menor=0;
+		Random rd= new Random();
 		
-		System.out.println("Insira 10 valores aleatorios: ");
+		int numeros[]= new int[10];
+		int maior=0,menor=0;
 		
 		for(int i=0;i<10;i++){
-			numeros= sc.nextInt();
+			numeros[i]= rd.nextInt(50);
 			
 			if(menor==0)
-				menor=numeros;
+				menor=numeros[i];
 			
-			if(numeros>maior)
-				maior=numeros;
+			if(numeros[i]>maior)
+				maior=numeros[i];
 			
-			else if(numeros<menor)
-				menor=numeros;
+			else if(numeros[i]<menor)
+				menor=numeros[i];
 		}
+		System.out.print("valores aleatorios entre 0 e 50: {");
+		for(int i=0;i<10;i++)
+			System.out.print(" " +numeros[i]);
+		System.out.println(" }");
 		System.out.println("Maior numero: " + maior);
 		System.out.println("Menor numero: " + menor);
 		
