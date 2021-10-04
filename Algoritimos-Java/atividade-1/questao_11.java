@@ -1,5 +1,4 @@
 package atividade;
-
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -22,41 +21,43 @@ public class questao11 {
 			opcao = sc.nextInt();
 
 			if (opcao == 1) {
-				
+
 				System.out.print("Insira o nome do produto: ");
-				busca = sc.next();
-				
+				sc.nextLine();
+				busca = sc.nextLine();
+
 				if (buscaFunc(produtos, busca))
-					printProduto(produtos,busca,valores);
-				else 
+					printProduto(produtos, busca, valores);
+				else
 					System.out.println("Produto nao encontrado!");
-				
+
 			} else if (opcao > 2 || opcao < 1) {
 				System.out.println("Opcao invalida!");
 			}
 
 		} while (opcao != 2);
-		
+
 		sc.close();
 
 	}
 
 	public static boolean buscaFunc(String produtos[], String busca) {
 		for (int i = 0; i < produtos.length; i++) {
-			if (produtos[i].toLowerCase().contains(busca.toLowerCase()))
+			if (produtos[i].toLowerCase().replace('-',' ').contains(busca.toLowerCase()))
 				return true;
 
 		}
 		return false;
 	}
 
-	public static void printProduto(String produtos[], String busca,float valores[]) {
+	public static void printProduto(String produtos[], String busca, float valores[]) {
 		for (int i = 0; i < produtos.length; i++) {
-			if (produtos[i].toLowerCase().contains(busca.toLowerCase())) {
+			if (produtos[i].toLowerCase().replace('-',' ').contains(busca.toLowerCase())) {
 				System.out.println("--------------------------------");
 				System.out.println("Produto encontrado: ");
 				System.out.printf("%s: %.2f\n", produtos[i], valores[i]);
 				System.out.println("--------------------------------");
+				
 			}
 		}
 	}
