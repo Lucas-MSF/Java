@@ -45,17 +45,26 @@ public class SistemaCompra {
 				}
 				break;
 			case 4:
-				System.out.println("Valor no caixa: " + caixa);
+				System.out.printf("Valor no caixa: %.2f \n",caixa);
 				pause();
 				break;
 			case 5:
 				System.out.print("Digite o ID do produto que deseja comprar: ");
 				opcao_venda = sc.nextInt() - 1;
-				if (opcao_venda >= 0 && opcao_venda <= 5) {
+				if (opcao_venda >= 0 && opcao_venda <= 4) {
 					System.out.print("Informe a quantidade: ");
 					quantidade_venda = sc.nextInt();
 					if (quantidade_venda > 0 && quantidade_venda <= quantidade[opcao_venda]) {
 						recibo(produtos[opcao_venda], precos[opcao_venda], quantidade_venda);
+						if(confirmaCompra()) {	
+							compraNomeCliente(clientes);
+							quantidade[opcao_venda]-=quantidade_venda;
+							caixa+= precos[opcao_venda]*quantidade_venda;
+						}
+						else {
+							System.out.println("Compra Cancelada!");
+							pause();
+						}
 					} else {
 						System.out.println("Quantidade Invalida!");
 						pause();
@@ -116,6 +125,15 @@ public class SistemaCompra {
 		return nome;
 	}
 
+	public static boolean confirmaCompra() {
+		System.out.println("Deseja confirmar a compra?0.Sim 1.Nao");
+		int resposta=sc.nextInt();
+		if(resposta==0)
+			return true;
+		else
+			return false;
+	}
+	
 	public static void recibo(String produto, float preco, int quantidade_venda)
 			throws IOException, InterruptedException {
 		limparTela();
@@ -129,6 +147,44 @@ public class SistemaCompra {
 		System.out.println("Data: " + data_venda.format(LocalDateTime.now()));
 		System.out.println("Hora: " + hora_venda.format(LocalDateTime.now()));
 		System.out.println("------------------------------------------");
+	}
+
+	public static void compraNomeCliente(String clientes[]) throws IOException, InterruptedException {
+		
+		System.out.println("Deseja efetuar a compra no ID de um cliente?(0.Sim 1.Nao)");
+		int resposta = sc.nextInt();
+		
+		if (resposta == 0) {
+		
+			System.out.println("Insira um ID valido de cliente: ");
+			int id= sc.nextInt();
+			
+			if(verificaCliente(clientes, id)) {
+				System.out.println("Compra confirmada no nome do cliente: "+clientes[id-1]);
+				pause();
+			}
+			else {
+				System.out.println("Codigo de cliente invalido!");
+				pause();
+				limparTela();
+				compraNomeCliente(clientes);
+			}
+		} else if (resposta == 1) {
+			System.out.println("Compra realizada com sucesso!");
+			pause();
+		} else {
+			System.out.println("Opcao invalida!");
+			pause();
+			limparTela();
+			compraNomeCliente(clientes);
+		}
+	}
+
+	public static boolean verificaCliente(String clientes[],int id) {
+		if(clientes[id-1]!="")
+			return true;
+		else
+			return false;
 	}
 
 	public static void limparTela() throws IOException, InterruptedException {
