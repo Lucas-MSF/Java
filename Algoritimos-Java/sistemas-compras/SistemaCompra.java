@@ -21,6 +21,12 @@ public class SistemaCompra {
 		float caixa = 0;
 		int opcao, opcao_venda, quantidade_venda;
 
+		while (login() == false) {
+			System.out.println("Senha ou usuario invalidos!");
+			pause();
+			limparTela();
+		}
+
 		do {
 			limparTela();
 			menu();
@@ -45,7 +51,7 @@ public class SistemaCompra {
 				}
 				break;
 			case 4:
-				System.out.printf("Valor no caixa: %.2f \n",caixa);
+				System.out.printf("Valor no caixa: %.2f \n", caixa);
 				pause();
 				break;
 			case 5:
@@ -56,12 +62,11 @@ public class SistemaCompra {
 					quantidade_venda = sc.nextInt();
 					if (quantidade_venda > 0 && quantidade_venda <= quantidade[opcao_venda]) {
 						recibo(produtos[opcao_venda], precos[opcao_venda], quantidade_venda);
-						if(confirmaCompra()) {	
+						if (confirmaCompra()) {
 							compraNomeCliente(clientes);
-							quantidade[opcao_venda]-=quantidade_venda;
-							caixa+= precos[opcao_venda]*quantidade_venda;
-						}
-						else {
+							quantidade[opcao_venda] -= quantidade_venda;
+							caixa += precos[opcao_venda] * quantidade_venda;
+						} else {
 							System.out.println("Compra Cancelada!");
 							pause();
 						}
@@ -90,6 +95,20 @@ public class SistemaCompra {
 		} while (opcao != 7);
 		sc.close();
 	}
+
+	public static boolean login() {
+		String usuario = "admin", usuarioDigitado, senha = "123", senhaDigitada;
+
+		System.out.print("Login: ");
+		usuarioDigitado = sc.next();
+		System.out.print("Senha: ");
+		senhaDigitada = sc.next();
+
+		if (usuarioDigitado.contains(usuario) && senhaDigitada.contains(senha))
+			return true;
+		else
+			return false;
+	};
 
 	public static void menu() {
 		System.out.println("- - - - - - - M E N U - - - - - - -");
@@ -127,13 +146,13 @@ public class SistemaCompra {
 
 	public static boolean confirmaCompra() {
 		System.out.println("Deseja confirmar a compra?0.Sim 1.Nao");
-		int resposta=sc.nextInt();
-		if(resposta==0)
+		int resposta = sc.nextInt();
+		if (resposta == 0)
 			return true;
 		else
 			return false;
 	}
-	
+
 	public static void recibo(String produto, float preco, int quantidade_venda)
 			throws IOException, InterruptedException {
 		limparTela();
@@ -150,20 +169,19 @@ public class SistemaCompra {
 	}
 
 	public static void compraNomeCliente(String clientes[]) throws IOException, InterruptedException {
-		
+
 		System.out.println("Deseja efetuar a compra no ID de um cliente?(0.Sim 1.Nao)");
 		int resposta = sc.nextInt();
-		
+
 		if (resposta == 0) {
-		
+
 			System.out.println("Insira um ID valido de cliente: ");
-			int id= sc.nextInt();
-			
-			if(verificaCliente(clientes, id)) {
-				System.out.println("Compra confirmada no nome do cliente: "+clientes[id-1]);
+			int id = sc.nextInt();
+
+			if (verificaCliente(clientes, id)) {
+				System.out.println("Compra confirmada no nome do cliente: " + clientes[id - 1]);
 				pause();
-			}
-			else {
+			} else {
 				System.out.println("Codigo de cliente invalido!");
 				pause();
 				limparTela();
@@ -180,8 +198,8 @@ public class SistemaCompra {
 		}
 	}
 
-	public static boolean verificaCliente(String clientes[],int id) {
-		if(clientes[id-1]!="")
+	public static boolean verificaCliente(String clientes[], int id) {
+		if (clientes[id - 1] != "")
 			return true;
 		else
 			return false;
